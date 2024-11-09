@@ -1,18 +1,15 @@
-import DefaultProject from "./DefaultProject";
-import Project from "./Project";
+import DefaultProject from "../class/DefaultProject";
+import Project from "../class/Project";
+import pubsub from "./pubsub";
 
 export default (function ParentDirectory() {
   const storageName = "projects";
   const defaultProjectName = "default";
 
-  // init default project
-  if (!getProjects()) {
-    setProjects([new DefaultProject(defaultProjectName)]);
-  }
-
   function createProject(name) {
     const project = new Project(name);
     setProjects([...getProjects(), project]);
+    setActiveProject(project.id);
   }
 
   function deleteProject(id) {
@@ -48,7 +45,7 @@ export default (function ParentDirectory() {
       .shift();
   }
 
-  function saveTodo(todo) {
+  function createTodo(todo) {
     const newProjectList = getProjects().map((proj) => {
       if (proj.activeStatus && proj.name !== defaultProjectName) {
         proj.todoIds.push(todo.id);
@@ -84,11 +81,20 @@ export default (function ParentDirectory() {
   }
 
   return {
-    createProject,
-    deleteProject,
+    getProjects,
     getActiveProject,
     setActiveProject,
-    saveTodo,
-    deleteTodo,
+    init: () => {
+      // init default project
+      if (!getProjects()) {
+        setProjects([new DefaultProject(defaultProjectName)]);
+      }
+      // PUBSUBS
+      pubsub.sub("create_project", createProject);
+      pubsub.sub("delete_project", deleteProject);
+      pubsub.sub("activate_project", setActiveProject);
+      pubsub.sub("create_todo", createTodo);
+      pubsub.sub("delete_todo", deleteTodo);
+    },
   };
 })();
