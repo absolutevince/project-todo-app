@@ -7,7 +7,6 @@ export default (function displayTodoCards() {
 
   function displayCards() {
     const todoItems = ParentDirectory.getAllTodo();
-    const activeProjectId = ParentDirectory.getActiveProject().id;
 
     container.innerHTML = "";
     todoItems.forEach((todo) => {
@@ -23,6 +22,7 @@ export default (function displayTodoCards() {
       pubsub.sub("create_todo", displayCards);
       pubsub.sub("activate_project", displayCards);
       pubsub.sub("edit_todo", displayCards);
+      pubsub.sub("delete_todo", displayCards);
       displayCards();
     },
   };

@@ -48,49 +48,28 @@ export default (function ParentDirectory() {
 
   function createTodo({ title, description, dueDate, priority, projectId }) {
     const t = new Todo(title, description, dueDate, priority, projectId);
-    const newProjectList = getProjects().map((proj) => {
-      return proj;
-    });
-    //newProjectList[0] = "default" project
+    const newProjectList = [...getProjects()];
+
     newProjectList[0].allTodo.push(t);
     setProjects(newProjectList);
-    console.log(getProjects());
   }
 
   function editTodo({ title, description, dueDate, priority, id }) {
-    const newProjectList = getProjects().map((proj) => {
-      if (proj.id === getProjects()[0].id) {
-        proj.allTodo = proj.allTodo.map((todo) => {
-          if (todo.id === id) {
-            todo = { ...todo, title, description, dueDate, priority };
-          }
-
-          return todo;
-        });
+    const newProjectList = [...getProjects()];
+    newProjectList[0].allTodo = newProjectList[0].allTodo.map((todo) => {
+      if (todo.id === id) {
+        todo = { ...todo, title, description, dueDate, priority };
       }
-      return proj;
+      return todo;
     });
 
     setProjects(newProjectList);
-    console.log(getProjects());
   }
 
   function deleteTodo(id) {
-    const newProjectList = getProjects().map((proj) => {
-      /**  only the active project's todos shows at the DOM, by checking the
-       * activeStatus if true means this code will always delete the correct todoId
-       * from the correct project as well the todo object from default project
-       * */
-      if (proj.activeStatus && proj.name !== defaultProjectName) {
-        proj.todoIds = proj.todoIds.filter((todoId) => todoId !== id);
-      }
-
-      return proj;
-    });
-
-    //newProjectList[0] = "default" project
+    const newProjectList = [...getProjects()];
     newProjectList[0].allTodo = newProjectList[0].allTodo.filter(
-      (todo) => todo.id !== id
+      (todo) => todo.id !== id,
     );
 
     setProjects(newProjectList);
@@ -101,7 +80,7 @@ export default (function ParentDirectory() {
     const activeProjectId = getActiveProject().id;
     function filterTodo() {
       return defaultProject.allTodo.filter(
-        (todo) => todo.projectId === activeProjectId
+        (todo) => todo.projectId === activeProjectId,
       );
     }
 

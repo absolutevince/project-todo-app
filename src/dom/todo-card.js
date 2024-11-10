@@ -1,5 +1,6 @@
 import checkFormOpened from "../utils/check-form-opened";
 import editTodoForm from "./edit-todo-form";
+import pubsub from "../modules/pubsub";
 
 export default function todoCard(todo) {
   const todoEl = document.createElement("article");
@@ -45,6 +46,10 @@ export default function todoCard(todo) {
     } else {
       todoEl.append(editTodoForm(todo));
     }
+  });
+
+  deleteButton.addEventListener("click", () => {
+    pubsub.publish("delete_todo", todo.id);
   });
 
   return todoEl;
