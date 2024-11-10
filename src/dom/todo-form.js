@@ -1,5 +1,7 @@
 import ParentDirectory from "../modules/Parent-directory";
 import pubsub from "../modules/pubsub";
+import { verifyTodo } from "../utils/verification";
+import newFormattedDate from "../utils/new-date";
 
 export default (function todoForm() {
   const form = document.querySelector("#todo-form");
@@ -9,28 +11,30 @@ export default (function todoForm() {
   const prioInput = document.querySelector("#todo-form #priority");
   const submitButton = document.querySelector("#todo-form .submit-button");
 
+  dueDateInput.value = newFormattedDate();
+
   submitButton.addEventListener("click", (e) => {
     e.preventDefault();
-    console.log({
-      title: titleInput.value,
-      description: descInput.value,
-      dueDate: dueDateInput.value,
-      prority: prioInput.value,
-      projectId: ParentDirectory.getActiveProject().id,
-    });
+
+    if (
+      verifyTodo({ title: titleInput.value, description: descInput.value }) ===
+      false
+    ) {
+      return;
+    }
+
     pubsub.publish("create_todo", {
       title: titleInput.value,
       description: descInput.value,
-      dueDate: dueDateInput.value,
-      prority: prioInput.value,
+      dueDate: Intl.DateTimeFormat().format(new Date(dueDateInput.value)),
+      priority: prioInput.value,
       projectId: ParentDirectory.getActiveProject().id,
     });
 
     form.classList.add("hidden");
     titleInput.value = "";
     descInput.value = "";
-    dueDateInput.value = "";
-    prioInput.value = "";
+    dueDateInput.value = newFormattedDate();
   });
 
   return {

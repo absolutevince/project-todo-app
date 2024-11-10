@@ -1,4 +1,5 @@
 import pubsub from "../modules/pubsub";
+import { verifyProject } from "../utils/verification";
 
 export default (function ProjectForm() {
   const form = document.querySelector("#project-form");
@@ -9,6 +10,8 @@ export default (function ProjectForm() {
 
   createProjectButton.addEventListener("click", (e) => {
     e.preventDefault();
+
+    if (verifyProject(nameInput.value) === false) return;
     pubsub.publish("create_project", nameInput.value);
 
     form.classList.add("hidden");

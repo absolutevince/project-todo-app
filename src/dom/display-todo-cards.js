@@ -22,6 +22,7 @@ export default (function displayTodoCards() {
       pubsub.sub("create_project", displayCards);
       pubsub.sub("create_todo", displayCards);
       pubsub.sub("activate_project", displayCards);
+      pubsub.sub("edit_todo", displayCards);
       displayCards();
     },
   };
