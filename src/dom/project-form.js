@@ -10,7 +10,9 @@ export default (function ProjectForm() {
   createProjectButton.addEventListener("click", (e) => {
     e.preventDefault();
     pubsub.publish("create_project", nameInput.value);
+
     form.classList.add("hidden");
+    nameInput.value = "";
   });
 
   return {

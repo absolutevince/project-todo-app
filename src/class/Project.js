@@ -5,6 +5,5 @@ export default class Project {
     this.name = name;
     this.id = uuidv4();
     this.activeStatus = false;
-    this.todoIds = [];
   }
 }

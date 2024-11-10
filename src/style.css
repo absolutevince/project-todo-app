@@ -5,11 +5,13 @@
 }
 
 :root {
-  --clr-primary: #fbfbfb;
-  --clr-secondary: #d4f6ff;
-  --clr-accent: #ffddae;
+  --clr-primary: #263238;
+  --clr-secondary: #78909c;
+  --clr-accent: #039be5;
+  --clr-accent-2: #039be5;
 
-  --clr-txt-primary: #526e48;
+  --clr-txt-primary: #b5eaf1;
+  --clr-txt-buttons: #263238;
 }
 
 .hidden {
@@ -17,28 +19,42 @@
 }
 
 body {
-  background-color: var(--clr-primary);
+  background-color: #fff;
+  color: var(--clr-txt-primary);
 }
 
 button,
 input,
-textarea {
+textarea,
+select {
   padding: 0.5em 1em;
   height: 100%;
   background-color: transparent;
-  border: 1px solid #333;
+  border: none;
+  box-shadow: 0 0 2px #333;
+  color: var(--clr-txt-buttons);
+}
+
+select {
+  border-radius: 5px;
+  box-shadow: 3px 2px 2px #000;
+  background-color: var(--clr-accent);
 }
 
 button {
   cursor: pointer;
   border-radius: 8px;
+  background: var(--clr-accent);
+  box-shadow: 3px 2px 2px #000;
 }
 
-input {
+input,
+textarea {
   background-color: rgb(255, 255, 255);
 }
 
-input:focus {
+input:focus,
+textarea:focus {
   background-color: transparent;
   outline-width: 1px;
   outline-color: #3e75da;
@@ -55,16 +71,16 @@ input:focus {
 }
 
 .wrapper > * {
-  border: 1px solid #333;
   border-radius: 10px;
   padding: 1rem;
+  box-shadow: 0 0 5px #333;
+  background: var(--clr-primary);
 }
 
 header {
   height: 15%;
   display: flex;
   align-items: center;
-  background-color: var(--clr-secondary);
 }
 
 header nav {
@@ -77,8 +93,11 @@ header nav {
 
 header nav #project-select {
   width: 8rem;
-  background-color: transparent;
   padding: 0 1rem;
+}
+
+header nav #project-select option {
+  box-shadow: 3px 2px 2px #000;
 }
 
 header nav .buttons {
@@ -96,14 +115,16 @@ main {
   height: 80%;
 }
 
-/* PROJECT */
-.create-project-container {
+/* FORMS */
+.create-project-container,
+.create-todo-container {
   position: relative;
   display: flex;
   align-items: center;
 }
 
-#project-form {
+#project-form,
+#todo-form {
   position: absolute;
   top: 100%;
   left: -50%;
@@ -113,4 +134,29 @@ main {
   flex-direction: column;
   gap: 0.5rem;
   box-shadow: 0 0 5px 1px #8b8b8b;
+}
+
+#todo-form select {
+  border: none;
+  background-color: #fff;
+  box-shadow: 0 0 2px #333;
+}
+
+#todo-form .pair-input {
+  display: flex;
+  gap: 0.5rem;
+}
+
+/* CARDS */
+.card-container {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 1rem;
+}
+
+.card {
+  border: 1px solid var(--clr-accent);
+  padding: 1rem;
+  height: 10rem;
 }
