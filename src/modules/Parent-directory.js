@@ -57,6 +57,23 @@ export default (function ParentDirectory() {
     console.log(getProjects());
   }
 
+  function editTodo({ title, description, dueDate, priority, id }) {
+    const newProjectList = getProjects().map((proj) => {
+      if (proj.id === getProjects()[0].id) {
+        proj.allTodo = proj.allTodo.map((todo) => {
+          if (todo.id === id) {
+            todo = { ...todo, title, description, dueDate, priority };
+          }
+
+          return todo;
+        });
+      }
+      return proj;
+    });
+
+    setProjects(newProjectList);
+  }
+
   function deleteTodo(id) {
     const newProjectList = getProjects().map((proj) => {
       /**  only the active project's todos shows at the DOM, by checking the
@@ -107,6 +124,7 @@ export default (function ParentDirectory() {
       pubsub.sub("delete_project", deleteProject);
       pubsub.sub("activate_project", setActiveProject);
       pubsub.sub("create_todo", createTodo);
+      pubsub.sub("edit_todo", editTodo);
       pubsub.sub("delete_todo", deleteTodo);
     },
   };

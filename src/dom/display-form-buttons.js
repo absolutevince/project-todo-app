@@ -1,3 +1,4 @@
+import checkFormOpened from "../utils/check-form-opened";
 import ProjectForm from "./project-form";
 import todoForm from "./todo-form";
 
@@ -6,10 +7,12 @@ export default (function displayFormButtons() {
   const createTodoButton = document.querySelector(".create-todo-button");
 
   function toggleProjectForm() {
+    if (checkFormOpened("#todo-form")) return;
     ProjectForm.toggleOpen();
   }
 
   function toggleTodoForm() {
+    if (checkFormOpened("#project-form")) return;
     todoForm.toggleOpen();
   }
 
