@@ -22,25 +22,32 @@
             </div>
             <div class="create-todo-container">
               <button class="create-todo-button">Create Todo</button>
-              <!-- <form class="hidden">
-                <label for="todo-title">Title</label>
-                <input id="todo-title" type="text" name="title" />
-                <label for="todo-description">Description</label>
+              <form id="todo-form" class="hidden">
+                <label for="title">Title</label>
+                <input id="title" type="text" name="title" />
+                <label for="description">Description</label>
                 <textarea
-                  id="todo-description"
+                  id="description"
                   type="text"
                   name="description"
                 ></textarea>
-                <label for="todo-due-date">Due Date</label>
-                <input id="todo-due-date" type="date" name="due date" />
-                <button>create</button>
-              </form> -->
+                <label for="due-date">Due Date</label>
+                <div class="pair-input">
+                  <input id="due-date" type="date" name="due date" />
+                  <select id="priority" name="due date">
+                    <option value="high">High</option>
+                    <option selected value="regular">Regular</option>
+                    <option value="low">Low</option>
+                  </select>
+                </div>
+                <button class="submit-button">create</button>
+              </form>
             </div>
           </div>
         </nav>
       </header>
-      <main class="todo-list">
-        <ul class="todo-list-container">
+      <main>
+        <ul class="card-container">
           <!-- Todo -->
         </ul>
       </main>

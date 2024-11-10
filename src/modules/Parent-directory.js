@@ -1,5 +1,6 @@
 import DefaultProject from "../class/DefaultProject";
 import Project from "../class/Project";
+import Todo from "../class/Todo";
 import pubsub from "./pubsub";
 
 export default (function ParentDirectory() {
@@ -45,18 +46,15 @@ export default (function ParentDirectory() {
       .shift();
   }
 
-  function createTodo(todo) {
+  function createTodo({ title, description, dueDate, priority, projectId }) {
+    const t = new Todo(title, description, dueDate, priority, projectId);
     const newProjectList = getProjects().map((proj) => {
-      if (proj.activeStatus && proj.name !== defaultProjectName) {
-        proj.todoIds.push(todo.id);
-      }
       return proj;
     });
-
     //newProjectList[0] = "default" project
-    newProjectList[0].allTodo.push(todo);
-
+    newProjectList[0].allTodo.push(t);
     setProjects(newProjectList);
+    console.log(getProjects());
   }
 
   function deleteTodo(id) {
@@ -80,10 +78,25 @@ export default (function ParentDirectory() {
     setProjects(newProjectList);
   }
 
+  function getAllTodo() {
+    const defaultProject = getProjects()[0];
+    const activeProjectId = getActiveProject().id;
+    function filterTodo() {
+      return defaultProject.allTodo.filter(
+        (todo) => todo.projectId === activeProjectId
+      );
+    }
+
+    return getActiveProject().id !== defaultProject.id
+      ? filterTodo()
+      : defaultProject.allTodo;
+  }
+
   return {
     getProjects,
     getActiveProject,
     setActiveProject,
+    getAllTodo,
     init: () => {
       // init default project
       if (!getProjects()) {

@@ -6,7 +6,6 @@ export default (function PubSub() {
       events[event] = [];
     }
     events[event].push(fn);
-    console.log(events);
   }
 
   function publish(event, ...value) {
