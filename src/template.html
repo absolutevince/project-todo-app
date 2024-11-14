@@ -8,45 +8,56 @@
   <body>
     <div class="wrapper">
       <header>
-        <nav>
-          <select name="project-select" id="project-select">
-            <!-- options -->
-          </select>
-          <div class="buttons">
-            <div class="create-project-container">
-              <button class="create-project-button">Create Project</button>
-              <form id="project-form" class="hidden">
-                <input class="name-input" type="text" name="project-name" />
-                <button class="submit-button">create</button>
-              </form>
-            </div>
-            <div class="create-todo-container">
-              <button class="create-todo-button">Create Todo</button>
-              <form id="todo-form" class="hidden">
-                <label for="title">Title</label>
-                <input id="title" type="text" name="title" />
-                <label for="description">Description</label>
-                <textarea
-                  id="description"
-                  type="text"
-                  name="description"
-                ></textarea>
-                <label for="due-date">Due Date</label>
-                <div class="pair-input">
-                  <input id="due-date" type="date" name="due date" />
-                  <select id="priority" name="due date">
-                    <option value="high">High</option>
-                    <option selected value="regular">Regular</option>
-                    <option value="low">Low</option>
-                  </select>
-                </div>
-                <button class="submit-button">create</button>
-              </form>
-            </div>
-          </div>
-        </nav>
+        <h1>Todo App</h1>
       </header>
       <main>
+        <nav>
+          <div class="project-container">
+            <select name="project-select" id="project-select">
+              <!-- options -->
+            </select>
+            <button class="create-project-button">
+              <svg
+                class="icon create-project-icon"
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 -960 960 960"
+                fill="#e6e6e1"
+              >
+                <path
+                  d="M440-440H200v-80h240v-240h80v240h240v80H520v240h-80v-240Z"
+                />
+              </svg>
+            </button>
+            <form class="create-project-form hidden">
+              <input class="name-input" type="text" name="project-name" />
+              <button class="submit-button">create</button>
+            </form>
+          </div>
+
+          <div class="create-todo-container">
+            <button class="create-todo-button">Create Todo</button>
+            <form class="todo-form hidden">
+              <label for="title">Title</label>
+              <input id="title" type="text" name="title" />
+              <label for="description">Description</label>
+              <textarea
+                id="description"
+                type="text"
+                name="description"
+              ></textarea>
+              <label for="due-date">Due Date</label>
+              <div class="pair-input">
+                <input id="due-date" type="date" name="due date" />
+                <select id="priority" name="due date">
+                  <option value="high">High</option>
+                  <option selected value="regular">Regular</option>
+                  <option value="low">Low</option>
+                </select>
+              </div>
+              <button class="submit-button">create</button>
+            </form>
+          </div>
+        </nav>
         <ul class="card-container">
           <!-- Todo -->
         </ul>

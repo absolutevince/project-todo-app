@@ -1,258 +1,92 @@
-* {
+*,
+*::after,
+*::before {
   box-sizing: border-box;
   padding: 0;
   margin: 0;
 }
 
 :root {
-  --clr-primary: #263238;
-  --clr-secondary: #78909c;
-  --clr-accent: #039be5;
-  --clr-accent-2: #039be5;
+  --clr-primary: #e3dbd0;
+  --clr-secondary: #a48269;
+  --clr-accent: #46403a;
 
-  --clr-txt-primary: #b5eaf1;
-  --clr-txt-secondary: #08373d;
-  --clr-txt-buttons: #263238;
+  --clr-txt-primary: #313130;
+  --clr-txt-secondary: #e6e6e1;
 }
 
-.hidden {
-  display: none !important;
-}
-
-body {
-  background-color: #fff;
+html {
+  background-color: var(--clr-primary);
+  font-family: Arial, Helvetica, sans-serif;
   color: var(--clr-txt-primary);
-}
-
-button,
-input,
-textarea,
-select {
-  padding: 0.5em 1em;
-  height: 100%;
-  background-color: transparent;
-  border: none;
-  box-shadow: 0 0 2px #333;
-  color: var(--clr-txt-buttons);
-}
-
-select {
-  border-radius: 5px;
-  box-shadow: 3px 2px 2px #000;
-  background-color: var(--clr-accent);
-}
-
-button {
-  cursor: pointer;
-  border-radius: 8px;
-  background: var(--clr-accent);
-  box-shadow: 3px 2px 2px #000;
-}
-
-input,
-textarea {
-  background-color: rgb(255, 255, 255);
-}
-
-input:focus,
-textarea:focus {
-  background-color: transparent;
-  outline-width: 1px;
-  outline-color: #3e75da;
-  /* border: 1px solid #333; */
 }
 
 .wrapper {
   max-width: 768px;
   margin: 0 auto;
-  height: 100vh;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
 }
 
 .wrapper > * {
-  border-radius: 10px;
-  padding: 1rem;
-  box-shadow: 0 0 5px #333;
-  background: var(--clr-primary);
+  padding: 0.5rem 1rem;
 }
 
-header {
-  height: 15%;
-  display: flex;
-  align-items: center;
+/* GLOBAL STYLES */
+.hidden {
+  display: none;
 }
 
-header nav {
-  display: flex;
-  width: 100%;
-  height: 80%;
-  justify-content: space-between;
-  padding: 0 8rem;
-}
-
-header nav #project-select {
-  width: 8rem;
-  padding: 0 1rem;
-}
-
-header nav #project-select option {
-  box-shadow: 3px 2px 2px #000;
-}
-
-header nav .buttons {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  width: 50%;
-}
-
-header nav .buttons > * {
-  height: 100%;
-}
-
-main {
-  height: 80%;
-  overflow-y: scroll;
-}
-
-/* FORMS */
-.create-project-container,
-.create-todo-container {
-  position: relative;
-  display: flex;
-  align-items: center;
-}
-
-#project-form,
-#todo-form,
-#edit-todo-form {
-  position: absolute;
-  top: 100%;
-  left: -50%;
-  background-color: var(--clr-secondary);
-  padding: 1rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
-  box-shadow: 0 0 5px 1px #8b8b8b;
-  z-index: 10;
-}
-
-#todo-form select,
-#edit-todo-form select {
+button,
+select {
+  padding: 0.5em 1em;
+  background-color: var(--clr-accent);
+  color: var(--clr-primary);
   border: none;
-  background-color: #fff;
-  box-shadow: 0 0 2px #333;
+  cursor: pointer;
+  border-radius: 5px;
 }
 
-#todo-form .pair-input,
-#edit-todo-form .pair-input {
-  display: flex;
-  gap: 0.5rem;
-}
-
-/* CARDS */
-.card-container {
-  list-style: none;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-  gap: 1rem;
-}
-
-.card {
-  padding: 1rem;
-  height: 15rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.5rem;
+input {
   background-color: var(--clr-secondary);
-  color: var(--clr-txt-secondary);
-
-  position: relative;
+  border: 1px solid var(--clr-accent);
+  padding: 0.5em 1em;
+  color: var(--clr-txt-primary);
 }
 
-#edit-todo-form {
-  top: 0;
-  left: 50%;
-  transform: translateX(-50%);
+/* HEADER */
+header {
+  background-color: var(--clr-secondary);
 }
 
-.card-title {
-  margin-top: 1rem;
+/* NAV */
+.project-container {
+  display: flex;
+  height: 2.3rem;
+  align-items: center;
 }
 
-.card-description {
+.project-container > * {
+  height: 2.3rem;
+}
+
+.project-container select {
+  width: 30ch;
+}
+
+.create-project-button {
+  background-color: transparent;
+  display: grid;
+  place-content: center;
+  transition: all 300ms linear;
+  height: 34px;
+  width: 34px;
+}
+
+.create-project-icon {
+  fill: var(--clr-txt-primary);
+  height: 34px;
+  width: 34px;
+}
+
+.create-project-form > * {
   height: 100%;
 }
-
-.card .date-and-priority {
-  align-self: end;
-  display: flex;
-  gap: 1rem;
-  position: absolute;
-  top: 0;
-  left: 0;
-  padding: 0 0.8rem;
-}
-
-.card-due-date,
-.card-priority {
-  color: #000;
-  font-size: 0.8rem;
-  padding: 0.5em;
-}
-
-.card-due-date {
-  order: 2;
-}
-
-.card-priority {
-  order: 1;
-  color: #fff;
-  width: 8ch;
-  text-align: center;
-}
-
-.card-priority.regular {
-  background-color: rgb(14, 187, 158);
-}
-
-.card-priority.low {
-  background-color: rgb(110, 109, 109);
-}
-
-.card-priority.high {
-  background-color: rgb(187, 132, 14);
-}
-
-.edit-and-delete {
-  position: absolute;
-  top: 0;
-  right: 0;
-  padding: 0 0.8rem;
-  display: flex;
-  gap: 1rem;
-}
-
-.edit-and-delete button {
-  border-top: none;
-  border-radius: 0;
-  box-shadow: 0 0 2px #333;
-  color: #fff;
-  border-bottom-left-radius: 5px;
-  border-bottom-right-radius: 5px;
-}
-
-.edit-and-delete .edit-button {
-  background-color: rgb(63, 149, 199);
-}
-
-.edit-and-delete .delete-button {
-  background-color: rgb(199, 63, 63);
-}
-
-/* .card > * {
-  border: 1px solid #fff;
-} */

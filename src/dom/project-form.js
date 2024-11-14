@@ -2,11 +2,12 @@ import pubsub from "../modules/pubsub";
 import { verifyProject } from "../utils/verification";
 
 export default (function ProjectForm() {
-  const form = document.querySelector("#project-form");
-  const nameInput = document.querySelector("#project-form .name-input");
+  const form = document.querySelector(".create-project-form");
+  const nameInput = document.querySelector(".create-project-form .name-input");
   const createProjectButton = document.querySelector(
-    "#project-form .submit-button"
+    ".create-project-form .submit-button"
   );
+  let isOpened = false;
 
   createProjectButton.addEventListener("click", (e) => {
     e.preventDefault();
@@ -19,6 +20,11 @@ export default (function ProjectForm() {
   });
 
   return {
-    toggleOpen: () => form.classList.toggle("hidden"),
+    toggleOpen: () => {
+      form.classList.toggle("hidden");
+      isOpened = !isOpened;
+      console.log(isOpened);
+    },
+    isOpened: () => isOpened,
   };
 })();
